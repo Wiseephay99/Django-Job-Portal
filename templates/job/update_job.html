@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+
+
+{% block content %}
+<div class="row justify-content-center mt-5 w-100">
+    <div class="col-md-6">
+        <div class="card shadow-lg mx-auto" style="max-width: 40rem;">
+<!--            <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="Job Advert Image">-->
+            <div class="card-body">
+                <h5 class="card-title mb-4 text-center">Update Your Job AD</h5>
+                <form method="POST">
+                    {% csrf_token %}
+                    <!-- Company Name -->
+                    <div class="mb-3">
+                        <label class="form-label">Job Title</label>
+                        {%  render_field form.title class='form-control'    %}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Salary</label>
+                        {%  render_field form.salary class='form-control'    %}
+                    </div>
+                    <div class="mb-3">
+                        <label  class="form-label">City</label>
+                        {%  render_field form.city class='form-control'    %}
+                    </div>
+                     <div class="mb-3">
+                        <label  class="form-label">State</label>
+                        {%  render_field form.state class='form-control'    %}
+                    </div>
+                     <div class="mb-3">
+                        <label  class="form-label">Industry</label>
+                        {%  render_field form.industry class='form-control'    %}
+                    </div>
+                    <div class="mb-3">
+                        <label  class="form-label">Job Type</label>
+                        {%  render_field form.job_type class='form-control'    %}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Job Description</label>
+                        {%  render_field form.job_description|attr:"rows:2"  class='form-control'    %}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Job Responsibilities</label>
+                        {%  render_field form.job_responsibilities|attr:"rows:2"  class='form-control'    %}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Job Requirements</label>
+                        {%  render_field form.requirements|attr:"rows:2"  class='form-control'    %}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Ideal Candidate</label>
+                        {%  render_field form.ideal_candidate|attr:"rows:2" class='form-control'    %}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Is Job Available?</label>
+                        {%  render_field form.is_available class='form-check-input'    %}
+                    </div>
+                    <!-- Submit Button -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

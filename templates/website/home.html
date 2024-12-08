@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+            <section>
+                <div class="container-fluid p-5 mb-4 bg-light rounded-3">
+                    <div class="container-fluid py-5">
+                        <h2 class="display-5 fw-bold"> Django Jobs.Get Hired Quickly
+                        </h2> <br>
+                        <div class="card">
+                            <div class="card-body">
+                                <form action="" class="row gy-2 gx-3 align-items-center" method="GET">
+                                    <div class="col-sm-2">
+                                        <label for="autoSizingInput">Name</label>
+                                            <!-- uses load widget tweaks to filter search based on the job title-->
+                                        {% render_field filter.form.title  class="form-control" id="autoSizingInput" placeholder="Job Keyword"  type="text" %}
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="autoSizingSelect" >Select Location</label>
+                                        {%  render_field filter.form.state class="form-select"   %}
+<!--                                        <select id="autoSizingSelect" class="form-select">-->
+<!--                                            <option selected>Select Location</option>-->
+<!--                                            <option value="1">One</option>-->
+<!--                                            <option value="2">Two</option>-->
+<!--                                            <option value="3">Three</option>-->
+<!--                                        </select>-->
+                                    </div>
+                                     <div class="col-sm-3">
+                                        <label for="autoSizingSelect">Choose Job Type</label>
+                                           {%  render_field filter.form.job_type class="form-select"   %}
+<!--                                        <select class="form-select" id="autoSizingSelect">-->
+<!--                                            <option selected>Choose Job Type</option>-->
+<!--                                            <option value="1">One</option>-->
+<!--                                            <option value="2">Two</option>-->
+<!--                                            <option value="3">Three</option>-->
+<!--                                        </select>-->
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="autoSizingSelect">Select Industry</label>
+                                            {%  render_field filter.form.industry class="form-select"   %}
+<!--                                        <select class="form-select" id="autoSizingSelect">-->
+<!--                                            <option selected>Select Industry</option>-->
+<!--                                            <option value="1">One</option>-->
+<!--                                            <option value="2">Two</option>-->
+<!--                                            <option value="3">Three</option>-->
+<!--                                        </select>-->
+                                    </div>
+                                    <div class="col-auto">
+                                        <br>
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <br>
+                        <p>
+                            Welcome to Django Job Portal! Search and get your dream job. We have thousands of Job
+                            offerings for you. Don't forget to leave a like when you get a Job.<br> Good luck with your Job Hunt!
+                        </p>
+                         <a href="{% url 'job-listing' %}" class="btn btn-outline-primary">Browse More Jobs</a>
+                    </div>
+                </div>
+            </section>
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+                {% for job in filter.qs %}
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ job.title }}</h5>
+                            <p>Industry: {{ job.industry }}</p>
+                            <p>Job Type: {{ job.job_type }}</p>
+                            <p>Location: {{ job.city }}, {{ job.salary }}</p>
+                            <p>Salary: {{ job.salary|intcomma }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">{{ job.timestamp|naturaltime }}</small>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <br>
+            <div class="row align-items-center">
+                <div class="col-md-10 mx-auto col-lg-2 mt-4">
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#"> 1 </a></li>
+                            <li class="page-item active" aria-current="page">
+                                <a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#"> 3 </a></li>
+                            <li class="page-item active" aria-current="page">
+                                <a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+{% endblock content %}
